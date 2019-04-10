@@ -1,0 +1,209 @@
+Step: build-step-credential-initializer:
+
+{"level":"warn","ts":1554899443.4336696,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/test\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1554899443.4342713,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+Step: build-step-git-source-0:
+
+{"level":"warn","ts":1554899444.347063,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/test\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1554899444.5002916,"logger":"fallback-logger","caller":"git-init/main.go:92","msg":"Successfully cloned \"https://github.com/*******/nodejs3.git\" @ \"baf2ecda854be48357ecd566851ed021b34412a6\" in path \"/workspace\""}
+Step: build-step-jenkins:
+
+Picked up _JAVA_OPTIONS: -Xmx400m
+Started
+Running in Durability level: PERFORMANCE_OPTIMIZED
+  14.267 [id=19]	WARNING	i.f.k.c.i.VersionUsageUtils#alert: The client is using resource type 'customresourcedefinitions' with unstable version 'v1beta1'
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /tmp/jenkinsTests.tmp/jenkins6324705155907992547test/workspace/job
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withCredentials
+Masking only exact matches of $CHARTMUSEUM_CREDS or $CHARTMUSEUM_CREDS_USR or $CHARTMUSEUM_CREDS_PSW
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (CI Build and push snapshot)
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ npm install
+npm notice created a lockfile as package-lock.json. You should commit this file.
+npm WARN REPLACE_ME@1.0.0 No repository field.
+npm WARN REPLACE_ME@1.0.0 No license field.
+
+up to date in 0.074s
+[Pipeline] sh
++ CI=true DISPLAY=:99 npm test
+
+> REPLACE_ME@1.0.0 test /tmp/jenkinsTests.tmp/jenkins6324705155907992547test/workspace/job
+> echo "no test specified" && exit 0
+
+no test specified
+[Pipeline] sh
++ export VERSION=0.0.0-SNAPSHOT-PR-2-11
++ skaffold build -f skaffold.yaml
+time="2019-04-10T12:31:11Z" level=warning msg="config version (skaffold/v1beta2) out of date: upgrading to latest (skaffold/v1beta7)"
+Generating tags...
+ - changeme -> 10.3.0.167:5000/*******/nodejs3:0.0.0-SNAPSHOT-PR-2-11
+Tags generated in 116.401µs
+Starting build...
+Building [changeme]...
+Sending build context to Docker daemon  96.26kB
+Step 1/6 : FROM node:9-slim
+ ---> e20bb4abe4ee
+Step 2/6 : ENV PORT 8080
+ ---> Using cache
+ ---> 88347219fdd6
+Step 3/6 : EXPOSE 8080
+ ---> Using cache
+ ---> 8b68f37f7816
+Step 4/6 : WORKDIR /usr/src/app
+ ---> Using cache
+ ---> 9183f268df4a
+Step 5/6 : COPY . .
+ ---> 5aa585182a5a
+Step 6/6 : CMD ["npm", "start"]
+ ---> Running in 54920c1c3473
+ ---> 1e7e97886b3a
+Successfully built 1e7e97886b3a
+Successfully tagged 10.3.0.167:5000/*******/nodejs3:0.0.0-SNAPSHOT-PR-2-11
+The push refers to repository [10.3.0.167:5000/*******/nodejs3]
+c8b45bf007b0: Preparing
+d9b87b3a8439: Preparing
+e16c226cf2a8: Preparing
+7fd597d009e4: Preparing
+7c6ab5fb7059: Preparing
+ed271eac23e9: Preparing
+156ff16f37e4: Preparing
+ed271eac23e9: Waiting
+156ff16f37e4: Waiting
+d9b87b3a8439: Layer already exists
+7c6ab5fb7059: Layer already exists
+ed271eac23e9: Layer already exists
+e16c226cf2a8: Layer already exists
+156ff16f37e4: Layer already exists
+7fd597d009e4: Layer already exists
+c8b45bf007b0: Pushed
+0.0.0-SNAPSHOT-PR-2-11: digest: sha256:b44fc322896dba72d411cdccfb51a6b3984790059f6c4762b8fbdec8af5b427f size: 1786
+Build complete in 4.171784041s
+Starting test...
+Test complete in 4.5µs
+Complete in 4.182935546s
+[Pipeline] sh
++ ** step post build --image 10.3.0.167:5000/*******/nodejs3:0.0.0-SNAPSHOT-PR-2-11
+[Pipeline] dir
+Running in /tmp/jenkinsTests.tmp/jenkins6324705155907992547test/workspace/job/charts/preview
+[Pipeline] {
+[Pipeline] sh
++ make preview
+sed -i -e "s/version:.*/version: 0.0.0-SNAPSHOT-PR-2-11/" Chart.yaml
+sed -i -e "s/version:.*/version: 0.0.0-SNAPSHOT-PR-2-11/" ../*/Chart.yaml
+sed -i -e "s|repository:.*|repository: 10.3.0.167:5000\/*******\/nodejs3|" values.yaml
+sed -i -e "s/tag:.*/tag: 0.0.0-SNAPSHOT-PR-2-11/" values.yaml
+sed -i -e 's|http: "true"|http: "false"\n    path-mode: path|' values.yaml
+echo "  version: 0.0.0-SNAPSHOT-PR-2-11" >> requirements.yaml
+** step helm build
+No $CHART_REPOSITORY defined so using the default value of: http://jenkins-x-chartmuseum:8080
+Adding missing Helm repo: jenkins-x http://chartmuseum.jenkins-x.io
+Successfully added Helm repository jenkins-x.
+Adding missing Helm repo: releases http://jenkins-x-chartmuseum:8080
+Successfully added Helm repository releases.
+[Pipeline] sh
++ ** preview --app nodejs3 --dir ../..
+Creating a preview
+Commit author email is empty for: 7994ee19b80afe51882f067be5b8887e76716c8c
+Looking for commits in: /tmp/jenkinsTests.tmp/jenkins6324705155907992547test/workspace/job/
+Commit not found: 7994ee19b80afe51882f067be5b8887e76716c8c
+Commit author email is empty for: a50fd2cba9c13a2ced948c66199b270b035d67da
+Looking for commits in: /tmp/jenkinsTests.tmp/jenkins6324705155907992547test/workspace/job/
+Commit not found: a50fd2cba9c13a2ced948c66199b270b035d67da
+Commit author email is empty for: 8a7d86743116c47d613b24c969acaa355d3b9927
+Looking for commits in: /tmp/jenkinsTests.tmp/jenkins6324705155907992547test/workspace/job/
+Commit not found: 8a7d86743116c47d613b24c969acaa355d3b9927
+Commit author email is empty for: d892afcd2edd06f3cf212e6f5a843ea86d6b0b81
+Looking for commits in: /tmp/jenkinsTests.tmp/jenkins6324705155907992547test/workspace/job/
+Commit not found: d892afcd2edd06f3cf212e6f5a843ea86d6b0b81
+Commit author email is empty for: ddb7d810a81cacc29fc200bd88ae60a29fd547b5
+Looking for commits in: /tmp/jenkinsTests.tmp/jenkins6324705155907992547test/workspace/job/
+Commit not found: ddb7d810a81cacc29fc200bd88ae60a29fd547b5
+Commit author email is empty for: 48bd6fb73241b33aa4fc548430130ed59c20762c
+Looking for commits in: /tmp/jenkinsTests.tmp/jenkins6324705155907992547test/workspace/job/
+Commit not found: 48bd6fb73241b33aa4fc548430130ed59c20762c
+Commit author email is empty for: 3fda832b159615ebbe27bbcf8d5123f694b414ba
+Looking for commits in: /tmp/jenkinsTests.tmp/jenkins6324705155907992547test/workspace/job/
+Commit not found: 3fda832b159615ebbe27bbcf8d5123f694b414ba
+Commit author email is empty for: efd187462ec5b83459b197eb23e93f33c19e530a
+Looking for commits in: /tmp/jenkinsTests.tmp/jenkins6324705155907992547test/workspace/job/
+Commit not found: efd187462ec5b83459b197eb23e93f33c19e530a
+Commit author email is empty for: e2d094ebf86ede5abb2e8386c68339438ced27ba
+Looking for commits in: /tmp/jenkinsTests.tmp/jenkins6324705155907992547test/workspace/job/
+Commit not found: e2d094ebf86ede5abb2e8386c68339438ced27ba
+Commit author email is empty for: a068dbde4808d9d9e5ed0b880c5b08404040a2b6
+Looking for commits in: /tmp/jenkinsTests.tmp/jenkins6324705155907992547test/workspace/job/
+Commit not found: a068dbde4808d9d9e5ed0b880c5b08404040a2b6
+Commit author email is empty for: baf2ecda854be48357ecd566851ed021b34412a6
+Looking for commits in: /tmp/jenkinsTests.tmp/jenkins6324705155907992547test/workspace/job/
+Found commit author match for: ******* with email address: cf9536@att.com
+expose:
+  Annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-delete-policy: hook-succeeded
+  config:
+    domain: ci.att.io
+    exposer: Ingress
+    http: "true"
+preview:
+  image:
+    repository: 10.3.0.167:5000/*******/nodejs3
+    tag: 0.0.0-SNAPSHOT-PR-2-11
+Applying generated chart . YAML via kubectl in dir: /tmp/helm-template-workdir-029244098/preview/output
+role.rbac.authorization.k8s.io/cleanup configured
+rolebinding.rbac.authorization.k8s.io/cleanup configured
+serviceaccount/cleanup configured
+configmap/exposecontroller configured
+role.rbac.authorization.k8s.io/expose configured
+rolebinding.rbac.authorization.k8s.io/expose configured
+serviceaccount/expose configured
+deployment.extensions/preview-preview configured
+service/nodejs3 configured
+
+Applying Helm hook post-upgrade YAML via kubectl in file: /tmp/helm-template-workdir-029244098/preview/helmHooks/preview/charts/expose/templates/job.yaml
+job.batch/expose created
+
+Waiting for helm post-upgrade hook Job expose to complete before removing it
+Deleting helm hook sources from file: /tmp/helm-template-workdir-029244098/preview/helmHooks/preview/charts/expose/templates/job.yaml
+job.batch "expose" deleted
+Removing Kubernetes resources from older releases using selector: jenkins.io/chart-release=preview,jenkins.io/version!=0.0.0-SNAPSHOT-PR-2-11 from all pvc configmap release sa role rolebinding secret
+Removing Kubernetes resources from older releases using selector: jenkins.io/chart-release=preview,jenkins.io/version!=0.0.0-SNAPSHOT-PR-2-11,jenkins.io/namespace=**-*******-nodejs3-pr-2 from clusterrole clusterrolebinding
+Updating PipelineActivities *******-nodejs3-pr-2-11 which has status Running
+Preview application is now available at: http://nodejs3.**-*******-nodejs3-pr-2.ci.att.io
+
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Release)
+Stage "Build Release" skipped due to when conditional
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Promote to Environments)
+Stage "Promote to Environments" skipped due to when conditional
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
