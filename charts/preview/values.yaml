@@ -4,7 +4,7 @@ expose:
     helm.sh/hook: post-install,post-upgrade
     helm.sh/hook-delete-policy: hook-succeeded
   config:
-    exposer:
+    exposer: Ingress
     path-mode: path
     http: false
     tlsacme: true
