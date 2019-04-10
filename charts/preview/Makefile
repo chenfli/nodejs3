@@ -10,6 +10,7 @@ else ifeq ($(OS),Linux)
 	sed -i -e "s/version:.*/version: $(PREVIEW_VERSION)/" ../*/Chart.yaml
 	sed -i -e "s|repository:.*|repository: $(DOCKER_REGISTRY)\/chenfli\/nodejs3|" values.yaml
 	sed -i -e "s/tag:.*/tag: $(PREVIEW_VERSION)/" values.yaml
+	sed -i -e "s/http: \"true\"/http: \"false\"\n    path-mode: path/" values.yaml
 else
 	echo "platfrom $(OS) not supported to release from"
 	exit -1
