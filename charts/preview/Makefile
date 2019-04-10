@@ -14,6 +14,6 @@ else
 	echo "platfrom $(OS) not supported to release from"
 	exit -1
 endif
-	sed -i -e "s/http: \"true\"/http: \"false\"\n    path-mode: path/" values.yaml
+	sed -i -e 's|http: "true"|http: "false"\n    path-mode: path|" values.yaml
 	echo "  version: $(PREVIEW_VERSION)" >> requirements.yaml
 	jx step helm build
