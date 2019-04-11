@@ -4,9 +4,11 @@ expose:
     helm.sh/hook: post-install,post-upgrade
     helm.sh/hook-delete-policy: hook-succeeded
   config:
+    urltemplate: https://cd.att.io
     exposer: Ingress
-    http: true
-    tlsacme: false
+    path-mode: path
+    http: false
+    tlsacme: true
 
 cleanup:
   Args:
