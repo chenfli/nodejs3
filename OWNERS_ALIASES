@@ -1,6 +1,9 @@
 aliases:
 - chenfli
+- kubedeployer
 best-approvers:
 - chenfli
+- kubedeployer
 best-reviewers:
 - chenfli
+- kubedeployer
