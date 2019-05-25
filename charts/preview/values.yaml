@@ -5,7 +5,7 @@ expose:
     helm.sh/hook-delete-policy: hook-succeeded
   config:
 #    urltemplate: '"{{.Namespace}}-{{.Service}}-{{.Domain}}"'
-    path-mode: path
+    urlPath: "chen"
     exposer: Ingress
     http: false
     tlsacme: true
