@@ -4,7 +4,7 @@ expose:
     helm.sh/hook: post-install,post-upgrade
     helm.sh/hook-delete-policy: hook-succeeded
   config:
-    urltemplate: '"{{.Service}}-{{.Namespace}}-{{.Domain}}"'
+    pathMode: "path"
     exposer: Ingress
     http: false
     tlsacme: true
